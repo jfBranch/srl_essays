@@ -11,12 +11,14 @@
 \newcommand{\SRLFontBold}{MinionPro-Bold.otf}
 \newcommand{\SRLFontBoldItalic}{MinionPro-BoldItalic.otf}
 
-% Booleanos: cambie únicamente true por false para desactivar cada opción.
+% Un solo booleano controla el color de los títulos y la variante de los logos.
 \newif\ifSRLColors
 \SRLColorstrue
 \newif\ifSRLOutline
 \SRLOutlinetrue
 
-% Si faltan los PNG, se omiten los logos sin impedir la compilación.
-\newcommand{\SRLCoverLogo}{figures/logos/srl-cover-color.png}
-\newcommand{\SRLHeaderLogo}{figures/logos/srl-header-color.png}
+% Si falta el PNG seleccionado, se omite; no se usa la otra variante.
+\newcommand{\SRLCoverLogoColor}{figures/logos/srl-cover-color.png}
+\newcommand{\SRLCoverLogoBW}{figures/logos/srl-cover-bw.png}
+\newcommand{\SRLHeaderLogoColor}{figures/logos/srl-header-color.png}
+\newcommand{\SRLHeaderLogoBW}{figures/logos/srl-header-bw.png}

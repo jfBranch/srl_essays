@@ -11,7 +11,7 @@ y cada entrega se identifica con una etiqueta y una Release con su PDF.
 
 | Ruta | Función |
 | --- | --- |
-| `template/` | Plantilla Chicago-Deusto/SRL, con fuente y colores configurables. |
+| `template/` | Plantilla Chicago-Deusto/SRL con Minion Pro y logos; fuente configurable y un booleano para colores de texto y logos. |
 | `essays/` | Una carpeta autónoma por ensayo. |
 | `latexmkrc` | Configuración común de compilación con XeLaTeX. |
 | `scripts/build.py` | Compilación local y comprobación de resultados. |
@@ -30,8 +30,10 @@ python3 scripts/build.py
 
 Compila la prueba técnica y la plantilla `template/main.tex`. Los documentos de
 `essays/*/main.tex` se detectan sin modificar el workflow. La plantilla usa
-`turabian-researchpaper` y `biblatex-chicago`; Minion Pro es configurable y, mientras
-falta, se utiliza una alternativa con advertencia. Véase [su guía](template/README.md).
+`turabian-researchpaper` y `biblatex-chicago`. Ya incluye los cuatro OTF de Minion Pro
+y los PNG proporcionados por el autor. La fuente y `\SRLColorstrue` / `\SRLColorsfalse`
+se configuran en `template/config/options.tex`; curso y fecha quedan siempre negros.
+Véase [su guía](template/README.md) para el uso y el estado de los logos BW.
 
 En GitHub, abrir **Actions → LaTeX → una ejecución correcta → Artifacts** para
 descargar los PDF y la información de versiones. Los artefactos se conservan
@@ -39,8 +41,10 @@ descargar los PDF y la información de versiones. Los artefactos se conservan
 
 ## Siguiente etapa
 
-Revisar la plantilla, incorporar los OTF y logos proporcionados por el autor y
-comprobar su paginación final. Después iniciar el ensayo sobre la primera resurrección.
+Revisar y aprobar la plantilla del PR; sustituir el PNG de portada BW, que actualmente
+es idéntico al de color, para una salida totalmente monocroma. Después iniciar
+el ensayo sobre la primera resurrección. Se conserva numeración simple según
+la recomendación Chicago/Turabian; la portada se cuenta, pero no muestra número.
 
 - [Estructura prevista de cada documento](template/README.md)
 - [Guía de trabajo, versiones y referencias técnicas](docs/workflow.md)

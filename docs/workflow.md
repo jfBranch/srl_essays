@@ -62,9 +62,10 @@ El PDF queda en `<documento>/build/main.pdf`. El workflow descubre
 La compilación correcta no sustituye la revisión visual, exegética o bibliográfica.
 
 Para un ensayo breve basta `\input`; no se necesitan submódulos Git, una clase
-personalizada ni `subfiles` desde el principio. Se elegirá la abstracción de
-estilo necesaria al implementar Chicago. Cada ensayo conserva una copia del
-estilo de la plantilla para poder evolucionar independientemente.
+personalizada ni `subfiles` desde el principio. La plantilla usa
+`turabian-researchpaper` y `biblatex-chicago`, con las adaptaciones del SRL en
+`config/`. Cada ensayo conserva una copia del estilo, los OTF y los logos de la
+plantilla para poder evolucionar independientemente.
 
 ## Versiones y entregas
 
