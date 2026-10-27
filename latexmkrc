@@ -2,6 +2,4 @@
 # pdf_mode=5 selecciona XeLaTeX; latexmk ejecuta Biber cuando corresponde.
 $pdf_mode = 5;
 $out_dir = 'build';
-$interaction = 'nonstopmode';
-$xelatex = 'xelatex -no-shell-escape -halt-on-error -file-line-error %O %S';
-
+$xelatex = 'xelatex -interaction=nonstopmode -no-shell-escape -halt-on-error -file-line-error %O %S';
