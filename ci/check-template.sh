@@ -14,7 +14,7 @@ compile_case() {
   (
     cd "$case_root/$1"
     latexmk -norc -r "$repo_root/latexmkrc" main.tex
-    if grep -Eq 'There were undefined (references|citations)|Missing character:|Please \(re\)run Biber|Some font shapes were not available' build/main.log; then
+    if grep -Eq 'There were undefined (references|citations)|Missing character:|Please \(re\)run Biber|Some font shapes were not available|Package fancyhdr Warning' build/main.log; then
       echo "Referencias, caracteres o variantes tipográficas sin resolver en $1" >&2
       exit 1
     fi
@@ -26,7 +26,7 @@ grep -q 'SRL-FONT-SOURCE: files' template/build/main.log
 grep -q 'SRL-FONT: MinionPro' template/build/main.log
 grep -q 'SRL-COVER-LOGO: figures/logos/srl-cover-color.png' template/build/main.log
 grep -q 'SRL-HEADER-LOGO: figures/logos/srl-header-color.png' template/build/main.log
-if grep -q 'Some font shapes were not available' template/build/main.log; then
+if grep -Eq 'Some font shapes were not available|Package fancyhdr Warning' template/build/main.log; then
   echo 'Variantes de Minion Pro sin resolver' >&2
   exit 1
 fi
