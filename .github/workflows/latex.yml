@@ -40,7 +40,6 @@ jobs:
           root_file: ${{ steps.documents.outputs.files }}
           work_in_root_file_dir: true
           texlive_version: '2026'
-          extra_system_packages: poppler-utils
           args: -norc -r /tmp/srl-latexmkrc
           pre_compile: |
             cp "$GITHUB_WORKSPACE/latexmkrc" /tmp/srl-latexmkrc
