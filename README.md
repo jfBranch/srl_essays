@@ -11,13 +11,13 @@ y cada entrega se identifica con una etiqueta y una Release con su PDF.
 
 | Ruta | Función |
 | --- | --- |
-| `template/` | Plantilla reutilizable; implementación Chicago pendiente. |
+| `template/` | Plantilla Chicago-Deusto/SRL, con fuente y colores configurables. |
 | `essays/` | Una carpeta autónoma por ensayo. |
 | `latexmkrc` | Configuración común de compilación con XeLaTeX. |
 | `scripts/build.py` | Compilación local y comprobación de resultados. |
 | `ci/smoke/` | Prueba técnica de XeLaTeX, español, Biber y referencias. |
 | `.github/workflows/latex.yml` | Compilación y artefactos PDF en GitHub Actions. |
-| `.github/rulesets/main.json` | Ruleset preparado para importar; requiere activación administrativa. |
+| `.github/rulesets/main.json` | Definición del ruleset main-quality, activado en GitHub. |
 | `docs/` | Flujo de trabajo, decisiones y ajustes de GitHub. |
 
 ## Comenzar
@@ -28,9 +28,10 @@ Con Python 3 y TeX Live 2026 instalados:
 python3 scripts/build.py
 ```
 
-Por ahora compila exclusivamente la prueba técnica, cuyo estilo bibliográfico
-no corresponde a Chicago. Los futuros `template/main.tex` y
-`essays/*/main.tex` se detectarán sin modificar el workflow.
+Compila la prueba técnica y la plantilla `template/main.tex`. Los documentos de
+`essays/*/main.tex` se detectan sin modificar el workflow. La plantilla usa
+`turabian-researchpaper` y `biblatex-chicago`; Minion Pro es configurable y, mientras
+falta, se utiliza una alternativa con advertencia. Véase [su guía](template/README.md).
 
 En GitHub, abrir **Actions → LaTeX → una ejecución correcta → Artifacts** para
 descargar los PDF y la información de versiones. Los artefactos se conservan
@@ -38,12 +39,12 @@ descargar los PDF y la información de versiones. Los artefactos se conservan
 
 ## Siguiente etapa
 
-Implementar y revisar visualmente la plantilla Chicago Deusto conforme a las
-guías del SRL. Después iniciar el ensayo sobre la primera resurrección.
+Revisar la plantilla, incorporar los OTF y logos proporcionados por el autor y
+comprobar su paginación final. Después iniciar el ensayo sobre la primera resurrección.
 
 - [Estructura prevista de cada documento](template/README.md)
 - [Guía de trabajo, versiones y referencias técnicas](docs/workflow.md)
 - [Ajustes administrativos y activación del ruleset](docs/github-settings.md)
 
-La creación de `main` no cambia automáticamente la rama predeterminada:
-`base-template` se conserva durante la transición administrativa.
+`main` es la rama predeterminada y el ruleset `main-quality` está activo.
+Los cambios se presentan mediante pull requests.

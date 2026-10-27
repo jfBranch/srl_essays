@@ -1,5 +1,9 @@
 # Ajustes administrativos
 
+Estado verificado: `main` es la rama predeterminada y `main-quality` está activo.
+El propietario aplicó ambos ajustes manualmente. Los comandos siguientes se
+conservan como referencia; no crear otro ruleset duplicado.
+
 Los archivos versionados no activan por sí mismos un ruleset ni cambian la rama
 predeterminada. El conector utilizado para preparar este repositorio permite
 escribir contenido, pero no ofrece esas operaciones administrativas.
@@ -32,8 +36,8 @@ usar `--method PUT repos/jfBranch/srl_essays/rulesets/ID` con el mismo archivo.
 
 También puede importarse el JSON desde Settings → Rules → Rulesets → New ruleset
 → Import a ruleset. Cambiar la rama predeterminada desde Settings → General.
-La rama original `base-template` se conserva hasta completar la transición;
-no debe usarse como almacén permanente de la plantilla.
+La plantilla reside en `template/`; la rama original `base-template` no debe
+usarse como almacén permanente de la plantilla.
 
 Verificar después:
 
@@ -41,4 +45,3 @@ Verificar después:
 gh repo view jfBranch/srl_essays --json defaultBranchRef
 gh api repos/jfBranch/srl_essays/rulesets
 ```
-
