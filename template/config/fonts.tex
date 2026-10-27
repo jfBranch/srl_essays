@@ -1,0 +1,31 @@
+% No se simulan negritas ni cursivas: las cuatro variantes deben existir.
+\defaultfontfeatures{Ligatures=TeX}
+\newcommand{\SRLLoadSystemFont}{%
+  \IfFontExistsTF{\SRLFontName}{%
+    \setmainfont{\SRLFontName}%
+    \edef\SRLActualFont{\SRLFontName}%
+    \typeout{SRL-FONT-SOURCE: system}%
+  }{%
+    \setmainfont{\SRLFallbackFont}%
+    \edef\SRLActualFont{\SRLFallbackFont}%
+    \PackageWarningNoLine{srl-template}{Fuente solicitada '\SRLFontName' no disponible.
+      Se usa '\SRLFallbackFont'. Esto NO es una compilacion con Minion Pro}%
+    \typeout{SRL-FONT-SOURCE: fallback}%
+  }%
+}
+\newcommand{\SRLLoadLocalFont}{%
+  \setmainfont{\SRLFontRegular}[
+    Path=\SRLFontDirectory,
+    UprightFont=\SRLFontRegular,
+    ItalicFont=\SRLFontItalic,
+    BoldFont=\SRLFontBold,
+    BoldItalicFont=\SRLFontBoldItalic
+  ]%
+  \edef\SRLActualFont{\SRLFontName}%
+  \typeout{SRL-FONT-SOURCE: files}%
+}
+\ifdefstrequal{\SRLFontName}{\SRLLocalFontFamily}{%
+  \IfFileExists{\SRLFontDirectory\SRLFontRegular}
+    {\SRLLoadLocalFont}{\SRLLoadSystemFont}%
+}{\SRLLoadSystemFont}
+\AtBeginDocument{\typeout{SRL-FONT: \SRLActualFont}}

@@ -1,0 +1,22 @@
+% Fuente preferida: nombre de la familia tal como figura en el sistema.
+\newcommand{\SRLFontName}{Minion Pro}
+\newcommand{\SRLFallbackFont}{TeX Gyre Termes}
+
+% Familia local: solo se usa si coincide con SRLFontName y existe Regular.
+% Cambie estos nombres si sus archivos OTF se llaman de otra manera.
+\newcommand{\SRLLocalFontFamily}{Minion Pro}
+\newcommand{\SRLFontDirectory}{fonts/}
+\newcommand{\SRLFontRegular}{MinionPro-Regular.otf}
+\newcommand{\SRLFontItalic}{MinionPro-It.otf}
+\newcommand{\SRLFontBold}{MinionPro-Bold.otf}
+\newcommand{\SRLFontBoldItalic}{MinionPro-BoldIt.otf}
+
+% Booleanos: cambie únicamente true por false para desactivar cada opción.
+\newif\ifSRLColors
+\SRLColorstrue
+\newif\ifSRLOutline
+\SRLOutlinetrue
+
+% Si faltan los PNG, se omiten los logos sin impedir la compilación.
+\newcommand{\SRLCoverLogo}{figures/srl-cover.png}
+\newcommand{\SRLHeaderLogo}{figures/srl-header.png}
