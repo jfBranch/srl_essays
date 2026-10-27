@@ -3,7 +3,7 @@
 Fuentes facilitadas por el autor: «Guía breve - Manual de estilo Chicago Deusto -
 SRL.pdf» (pp. 14-18 del PDF para formato y ejemplos NB anteriores) y «Guía de
 redacción para ensayos de teología - SRL.pdf» (especialmente sección III).
-Se incorporan las preferencias del autor sobre fuente, RGB y logos posteriores.
+Se incorporan las preferencias del autor sobre fuente, RGB y logos suministrados.
 No se publican los PDF fuente.
 
 ## Paquetes prioritarios
@@ -41,17 +41,25 @@ con todo Chicago-Deusto. Fuentes inusuales y datos requieren revisión editorial
 | Notas 10 pt, simples, izquierda, misma familia | Adaptación después de cargar los paquetes. |
 | Bibliografía 12 pt, doble espacio, francesa, A-Z | `\bibfont`, `\bibhang=1.25cm`, `sorting=nty`, `sortlocale=es_ES`. |
 | Times New Roman o Arial | Excepción solicitada: Minion Pro configurable, alternativa explícita. |
-| Colores y logos | Preferencias del autor, no requisitos de la guía; cuatro RGB exactos y PNG opcionales. |
+| Colores y logos | Un booleano para títulos y selección de PNG `color`/`bw`; curso y fecha siempre negros. Cuatro RGB exactos disponibles. |
+| Numeración | Número simple arriba a la derecha; portada contada como página 1, sin número visible. |
 
 Decisiones donde las guías no fijan valores: papel Carta (`letterpaper`, modificable
-en `main.tex`), número arábigo arriba a la derecha desde la hoja posterior a la
-portada, sangría francesa de 1,25 cm y bloque para citas de exactamente 40 palabras.
+en `main.tex`), sangría francesa de 1,25 cm y bloque para citas de exactamente 40 palabras.
+
+Para numeración se sigue la [ficha oficial Chicago/Turabian](https://cmosshoptalk.com/2018/06/12/how-do-i-format-margins-and-page-numbers-in-turabian-chicago-style/):
+portada contada sin número impreso y número simple arriba a la derecha. La plantilla
+mantiene una serie arábiga continua, incluyendo el bosquejo SRL. No se añade «# de #»:
+no se encontró respaldo explícito para atribuir ese formato a Chicago; tampoco se
+afirma que exista una prohibición expresa. Consulta realizada el 27 de octubre de 2026.
 
 Permanecen en manos del autor: párrafos de hasta diez renglones; proporción de
 citas directas; extensión de introducción y conclusión; calidad de fuentes y
 localizadores; requisitos particulares del curso. No se imponen universalmente
 las 3600 palabras y diez fuentes del ensayo sobre la primera resurrección.
 
-Cambiar fuente modifica potencialmente la paginación. Se requiere revisión con
-los OTF y logos definitivos cuando estén disponibles. El gris para curso y fecha
-tiene bajo contraste sobre blanco; se conserva el RGB solicitado.
+Los cuatro OTF de Minion Pro y los cuatro PNG ya están incluidos. Cambiar fuente
+modifica potencialmente la paginación y requiere revisar el PDF. Curso y fecha
+se muestran negros para mejorar el contraste; el gris corporativo sigue definido.
+Los archivos `srl-cover-color.png` y `srl-cover-bw.png` son idénticos y contienen
+color: falta sustituir este último para obtener una portada monocroma real.

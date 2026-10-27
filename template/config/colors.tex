@@ -4,12 +4,12 @@
 \definecolor{darkgreySRL}{RGB}{237,235,232}
 \definecolor{lightgreySRL}{RGB}{247,245,242}
 
+% Curso y fecha permanecen negros en ambos modos.
+\colorlet{SRLCoverDetailColor}{black}
 \ifSRLColors
   \colorlet{SRLHeadingColor}{redSRL}
-  \colorlet{SRLCoverDetailColor}{darkgreySRL}
   \typeout{SRL-COLORS: true}
 \else
   \colorlet{SRLHeadingColor}{black}
-  \colorlet{SRLCoverDetailColor}{black}
   \typeout{SRL-COLORS: false}
 \fi

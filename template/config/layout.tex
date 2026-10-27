@@ -89,6 +89,9 @@
     \MakeUppercase{\EssayCity}\par
     {\color{SRLCoverDetailColor}\MakeUppercase{\EssayDate}\par}
   \end{titlepage}
+  % Chicago/Turabian cuenta la portada aunque oculte su número.
+  % titlepage reinicia el contador en documentos oneside: restaurar página 2.
+  \setcounter{page}{2}
   \pagestyle{fancy}
 }
 
