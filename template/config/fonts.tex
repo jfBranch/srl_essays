@@ -6,7 +6,11 @@
     \edef\SRLActualFont{\SRLFontName}%
     \typeout{SRL-FONT-SOURCE: system}%
   }{%
-    \setmainfont{\SRLFallbackFont}%
+    \ifdefstring{\SRLFallbackFont}{TeX Gyre Termes}{%
+      \setmainfont{texgyretermes}[
+        Extension=.otf,UprightFont=*-regular,ItalicFont=*-italic,
+        BoldFont=*-bold,BoldItalicFont=*-bolditalic]%
+    }{\setmainfont{\SRLFallbackFont}}%
     \edef\SRLActualFont{\SRLFallbackFont}%
     \PackageWarningNoLine{srl-template}{Fuente solicitada '\SRLFontName' no disponible.
       Se usa '\SRLFallbackFont'. Esto NO es una compilacion con Minion Pro}%
