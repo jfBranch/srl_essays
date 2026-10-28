@@ -1,112 +1,81 @@
-# Flujo de trabajo y decisiones
+# Flujo de trabajo
 
-## Una colección de ensayos en un repositorio
+## Ramas y revisión
 
-`main` conserva la plantilla y todos los ensayos. Las ramas representan cambios
-en curso; las carpetas representan documentos; las etiquetas representan versiones.
-Una rama permanente por ensayo es posible, pero separaría los trabajos en árboles
-distintos, dificultaría consultarlos juntos y obligaría a propagar infraestructura
-entre ramas. Para esta colección se adopta GitHub flow, sin `develop` ni el ciclo
-de ramas de release/hotfix de GitFlow.
+Se usa [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow).
+`main` reúne la plantilla y los ensayos; cada cambio se prepara en una rama
+temporal y se integra mediante un PR con **Squash and merge**.
+Las carpetas identifican documentos; las etiquetas, versiones.
 
-Convenciones de ramas temporales:
+Convenciones de ramas:
 
-- `template/chicago-srl`: implementación o mejora de la plantilla.
-- `essay/primera-resurreccion`: redacción del ensayo.
-- `fix/referencias-primera-resurreccion`: corrección acotada.
-- `chore/latex-ci`: infraestructura.
+- `template/tema`: cambios de la plantilla.
+- `essay/tema`: redacción de un ensayo.
+- `fix/tema`: correcciones puntuales.
+- `chore/tema`: infraestructura.
 
-Ejemplo de trabajo local (Git y Python 3 instalados):
+Antes de crear una rama:
 
 ```sh
-git clone https://github.com/jfBranch/srl_essays.git
-cd srl_essays
 git switch main
 git pull --ff-only
-git switch -c template/chicago-srl
-python3 scripts/build.py
-git add template
-git commit -m "template: ajustar notas y bibliografía al estilo SRL"
-git push -u origin template/chicago-srl
+git switch -c essay/tema
 ```
 
-Abrir un pull request hacia `main`, revisar el PDF en Actions y fusionar con
-**Squash and merge**. Un autor único puede fusionar su propio PR: la propuesta
-de ruleset exige PR y compilación correcta, pero cero aprobaciones externas.
+Al terminar, revisar y fusionar el PR y borrar la rama temporal. Las reglas de
+integración se mantienen en [configuración de GitHub](github-settings.md).
+Para preparar un documento, seguir [iniciar un ensayo](../essays/README.md#iniciar-un-ensayo).
 
-## Edición y compilación
+## Compilación
 
-Usar UTF-8, LF y nombres de archivo sin espacios ni tildes. En el contenido sí
-se escribe español normal. Una oración por línea facilita los diffs; la línea
-en blanco sigue delimitando el párrafo en LaTeX. Hacer commits pequeños por
-argumento, revisión bibliográfica o cambio de estilo; evitar mezclar una
-reformulación del texto con cambios masivos de formato.
-
-Instalar TeX Live **2026** con XeLaTeX, latexmk y Biber. El año corresponde a la
-distribución TeX Live, no al nombre de una versión independiente de XeLaTeX.
+Instalar Python 3 y TeX Live **2026** con XeLaTeX, latexmk y Biber.
+Desde la raíz del repositorio:
 
 ```sh
 python3 scripts/build.py                            # todos los documentos
-python3 scripts/build.py essays/2026-tema/main.tex  # un documento existente
+python3 scripts/build.py template/main.tex         # la plantilla
+python3 scripts/build.py essays/2026-tema/main.tex  # un ensayo
 python3 scripts/build.py --list                    # documentos detectados
 ```
 
-En Windows se puede sustituir `python3` por `py -3`. El script no depende de
-Bash ni de Make. Se ejecuta desde cualquier directorio. Para compilación manual,
-entrar en la carpeta del documento y cargar el `latexmkrc` de la raíz con `-r`.
+En Windows puede usarse `py -3`. El script también puede invocarse por su ruta
+desde otro directorio. `latexmk` ejecuta las pasadas necesarias de XeLaTeX y Biber;
+la configuración común está en `latexmkrc`. El PDF queda en `<documento>/build/main.pdf`.
 
-`latexmk` se ocupa de las pasadas de XeLaTeX, Biber y referencias cruzadas.
-El PDF queda en `<documento>/build/main.pdf`. El workflow descubre
-`template/main.tex` y `essays/*/main.tex` automáticamente, además de la prueba
-`ci/smoke/main.tex`. Comprueba referencias sin resolver y caracteres ausentes.
-La compilación correcta no sustituye la revisión visual, exegética o bibliográfica.
+## Edición
 
-Para un ensayo breve basta `\input`; no se necesitan submódulos Git, una clase
-personalizada ni `subfiles` desde el principio. La plantilla usa
-`turabian-researchpaper` y `biblatex-chicago`, con las adaptaciones del SRL en
-`config/`. Cada ensayo conserva una copia del estilo, los OTF y los logos de la
-plantilla para poder evolucionar independientemente.
+Usar UTF-8, LF y nombres de archivo sin espacios ni tildes. Escribir una oración
+por línea facilita revisar los cambios; una línea vacía delimita un párrafo.
+Agrupar los commits por argumento, revisión bibliográfica o ajuste de formato.
+
+Versionar `.tex`, `.bib`, recursos y documentación propia. Guardar las salidas
+en `build/`. Los libros, artículos y materiales del curso permanecen fuera del
+repositorio público; las figuras PDF utilizadas por el documento sí se versionan.
+
+## Integración continua
+
+[El workflow LaTeX](../.github/workflows/latex.yml) descubre `template/main.tex`,
+`essays/*/main.tex` y la prueba técnica `ci/smoke/main.tex`. Comprueba citas,
+referencias y caracteres; [las pruebas de plantilla](../ci/check-template.sh)
+ejercitan las opciones de presentación, fuentes y recursos opcionales.
+
+Para revisar el resultado, abrir **Actions → LaTeX → ejecución → Artifacts**.
+Los PDF, logs y versiones de herramientas se conservan 30 días; los registros de
+fallos, 7 días. Revisar visualmente el PDF y aplicar los
+[criterios editoriales](template-requirements.md) antes de entregar.
+
+Las acciones se fijan a commits y TeX Live al año indicado. Dependabot propone
+actualizaciones mensuales. Para conservar una entrega, archivar su PDF exacto.
 
 ## Versiones y entregas
 
 Etiquetas sugeridas:
 
-- `template-v1.0.0`: primera plantilla aprobada.
-- `essay-2026-primera-resurreccion-v1.0.0`: primera entrega.
-- `essay-2026-primera-resurreccion-v1.0.1`: corrección posterior.
+- `template-v1.0.0`: plantilla aprobada.
+- `essay-2026-tema-v1.0.0`: primera entrega de un ensayo.
+- `essay-2026-tema-v1.0.1`: corrección posterior.
 
-Una etiqueta apunta a un commit del repositorio completo; su nombre identifica
-el documento al que corresponde. No mover etiquetas de entregas ya realizadas.
-Crear una Release manual con esa etiqueta, una nota breve, el PDF presentado y
-el archivo `toolchain.txt` de la compilación. No se publica ninguna Release
-automáticamente al hacer push. Los artefactos de CI duran 30 días y sirven para
-revisión; no son el archivo definitivo de entregas.
-
-Se fijan las acciones a commits y el año de TeX Live a 2026. Dependabot propone
-actualizaciones mensuales de las acciones. El año no congela cada paquete ni
-el contenedor: no se promete reproducción bit a bit. Para una reproducción más
-estricta futura, fijar también el digest del contenedor y las versiones de fuentes;
-para preservar la entrega, conservar siempre el PDF exacto.
-
-## Fuentes y material de consulta
-
-Versionar `.tex`, `.bib`, scripts, figuras necesarias y documentación propia.
-No incorporar archivos auxiliares ni copias completas de libros y artículos al
-repositorio público. Los materiales del curso permanecen como fuentes de trabajo;
-la bibliografía del ensayo recoge sus datos y las notas citan páginas verificadas.
-Las figuras PDF sí pueden ser entradas legítimas: por eso no se ignora `*.pdf`
-globalmente. Las salidas van siempre a `build/`.
-
-## Referencias técnicas consultadas
-
-- [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow).
-- [GitFlow y reflexión posterior de su autor](https://nvie.com/posts/a-successful-git-branching-model/).
-- [Overleaf: proyectos de varios archivos](https://www.overleaf.com/learn/latex/Multi-file_LaTeX_projects).
-- [Overleaf: organización de proyectos](https://www.overleaf.com/learn/latex/Management_in_a_large_project).
-- [CTAN: latexmk](https://ctan.org/pkg/latexmk).
-- [TeX Live](https://www.tug.org/texlive/).
-- [Acción de compilación LaTeX](https://github.com/xu-cheng/latex-action).
-- [Reglas disponibles en GitHub](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets).
-- [Seguridad de GitHub Actions](https://docs.github.com/en/actions/reference/security/secure-use).
-- [Releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases).
-
+Cada etiqueta apunta a un commit del repositorio completo. Crear una Release
+con esa etiqueta, una descripción breve, el PDF presentado y `toolchain.txt`.
+Las etiquetas de entregas publicadas permanecen fijas. Las Releases se crean
+manualmente.
