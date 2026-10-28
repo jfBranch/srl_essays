@@ -44,6 +44,7 @@ jobs:
           pre_compile: |
             cp "$GITHUB_WORKSPACE/latexmkrc" /tmp/srl-latexmkrc
             { xelatex --version; latexmk --version; biber --version; } > "$GITHUB_WORKSPACE/toolchain.txt"
+          post_compile: bash ci/check-template.sh
       - name: Comprobar citas, referencias y caracteres
         run: python3 scripts/build.py --check-logs
       - name: Conservar PDF y datos de compilación
@@ -52,6 +53,8 @@ jobs:
           name: latex-${{ github.sha }}
           path: |
             **/build/*.pdf
+            **/build/*.log
+            **/build/fonts.txt
             toolchain.txt
           if-no-files-found: error
           retention-days: 30
@@ -66,4 +69,3 @@ jobs:
             toolchain.txt
           if-no-files-found: ignore
           retention-days: 7
-

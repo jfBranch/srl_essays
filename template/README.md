@@ -1,30 +1,65 @@
-# Plantilla base
+# Plantilla Chicago-Deusto / SRL
 
-La próxima etapa construirá aquí la plantilla según las guías Chicago Deusto y
-de redacción del SRL. No hay todavía una plantilla editorial implementada.
+Guía para escribir y configurar un ensayo. Para crear su carpeta, seguir los
+[pasos de inicio](../essays/README.md); para generar el PDF, consultar
+[compilación](../docs/workflow.md#compilación).
 
-Estructura prevista, autónoma y copiable a `essays/<año>-<tema>/`:
+## Archivos
 
-| Ruta | Responsabilidad |
+| Ruta | Contenido |
 | --- | --- |
-| `main.tex` | Documento raíz: carga estilo, metadatos, secciones y bibliografía. |
-| `metadata.tex` | Título, autor, curso, profesor y fecha. |
-| `config/preamble.tex` | Paquetes, fuentes, márgenes y convenciones editoriales. |
-| `sections/01-introduccion.tex` | Problema, tesis y recorrido argumental. |
-| `sections/02-argumentacion.tex` | Desarrollo; dividir por argumentos si mejora la lectura. |
-| `sections/03-conclusion.tex` | Conclusión del ensayo. |
-| `references.bib` | Entradas bibliográficas utilizadas en este documento. |
-| `figures/` | Figuras originales o con autorización para incluirlas. |
-| `fonts/` | Solo fuentes cuya licencia permita distribuirlas, si son necesarias. |
-| `notes/` | Esquemas y notas propias, fuera del texto compilado. |
-| `build/` | PDF y auxiliares generados; excluidos de Git. |
+| `main.tex` | Orden de las partes del documento. |
+| `metadata.tex` | Datos de portada; el subtítulo puede quedar vacío. |
+| `config/options.tex` | Opciones de presentación. |
+| `sections/*.tex` | Introducción, desarrollo y conclusión. |
+| `references.bib` | Datos de las ediciones consultadas. |
+| [fonts/](fonts/README.md) | Configuración de familias tipográficas y OTF. |
+| [figures/](figures/README.md) | Colores, logos y otras figuras. |
+| [notes/](notes/README.md) | Apuntes fuera del documento compilado. |
 
-Para ensayos breves se usará `\input{sections/01-introduccion}`: `\include`
-introduce saltos de página que normalmente no convienen aquí. Cada `main.tex`
-se compila desde su propia carpeta; las rutas internas son relativas a ella.
+`config/preamble.tex` carga los paquetes. Los archivos `fonts.tex`, `colors.tex`,
+`logos.tex` y `layout.tex` contienen la configuración editorial.
 
-Una vez validada, etiquetar la plantilla, por ejemplo `template-v1.0.0`.
-Cada nuevo ensayo copiará esa versión e indicará su etiqueta de origen en su
-README. Las mejoras posteriores se adoptarán deliberadamente: no se cambiará
-el diseño de ensayos entregados mediante una dependencia compartida mutable.
+Al empezar, sustituir los párrafos y referencias de ejemplo por el contenido
+y las fuentes del ensayo.
 
+## Bosquejo y títulos
+
+En `config/options.tex`, `\SRLOutlinetrue` genera el bosquejo a partir de los
+títulos del desarrollo. Con `\SRLOutlinefalse`, describir el recorrido argumental
+en la introducción.
+
+```latex
+\section{Argumento principal}
+\subsection{Razón que lo sostiene}
+\subsubsection{Detalle pertinente}
+```
+
+Escribir los títulos con inicial mayúscula y sin punto final. El tercer nivel
+agrega el punto y continúa con el texto en la misma línea. Introducción y
+conclusión usan `\section*`.
+
+## Citas y bibliografía
+
+```latex
+Una paráfrasis con localizador.\autocite[202]{clave}
+\enquote{Una cita breve}.\autocite[25]{clave}
+\autocite[Véase][25-27]{clave}
+\footnote{Comentario propio; véase \cite[25]{clave}.}
+```
+
+Para una cita de 40 palabras o más:
+
+```latex
+\begin{SRLblockquote}
+Texto de la cita, sin comillas.\autocite[45]{clave}
+\end{SRLblockquote}
+```
+
+La bibliografía se genera con las entradas citadas de `references.bib`.
+Usar `shorttitle` para ajustar el título abreviado; `urldate` para la fecha de
+consulta de páginas web; `translator` para traducciones; `booktitle` y `pages`
+para capítulos.
+
+Los [criterios editoriales](../docs/template-requirements.md) reúnen las reglas
+de formato y las decisiones de adaptación de la guía SRL.
