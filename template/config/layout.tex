@@ -1,5 +1,5 @@
 % Guía breve SRL, pp. 14-18 del PDF: márgenes, texto, títulos y aparato crítico.
-% Letter es una elección documentada: las guías no fijan tamaño de papel.
+% Criterios editoriales: docs/template-requirements.md.
 \geometry{margin=3cm,headheight=25pt,headsep=8mm,footskip=12mm}
 \setlength{\parindent}{1.25cm}
 \setlength{\JustifyingParindent}{1.25cm}
@@ -29,7 +29,7 @@
 \titlespacing{\subsubsection}{1.25cm}{0.5\baselineskip}{0.5em}
 
 % Bosquejo sincronizado con los títulos del desarrollo, sin páginas ni puntos guía.
-% La guía breve prescribe entradas sin negrita (difiere de la de redacción).
+% Entradas del bosquejo sin negrita.
 \titlecontents{section}[0pt]{\normalfont\normalsize}
   {\thecontentslabel.\enspace}{}{}
 \titlecontents{subsection}[1.25cm]{\normalfont\normalsize}
@@ -66,7 +66,7 @@
   \item[]\ignorespaces
 }{\end{list}\endgroup\ignorespacesafterend}
 
-% Portada: 12 pt, centrada, mayúsculas; logos opcionales, sin sustitutos inventados.
+% Portada: 12 pt, centrada, mayúsculas; logos opcionales.
 \newcommand{\SRLmaketitle}{%
   \begin{titlepage}
     \thispagestyle{empty}\centering\normalfont\normalsize\doublespacing
@@ -90,13 +90,13 @@
     {\color{SRLCoverDetailColor}\MakeUppercase{\EssayDate}\par}
   \end{titlepage}
   % Chicago/Turabian cuenta la portada aunque oculte su número.
-  % titlepage reinicia el contador en documentos oneside: restaurar página 2.
+  % titlepage reinicia el contador en documentos oneside; continuar en página 2.
   \setcounter{page}{2}
   \pagestyle{fancy}
 }
 
 % Separa las partes que la guía denomina «hoja única» y avisa si desbordan.
-% Nunca reduce la fuente ni recorta texto para forzarlas a caber.
+% El desbordamiento genera una advertencia para la revisión editorial.
 \newenvironment{SRLsinglepage}[1]{%
   \clearpage\def\SRLPagePart{#1}\label{srl:#1:start}%
 }{%

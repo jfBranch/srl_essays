@@ -1,47 +1,34 @@
-# Ajustes administrativos
+# Configuración de GitHub
 
-Estado verificado: `main` es la rama predeterminada y `main-quality` está activo.
-El propietario aplicó ambos ajustes manualmente. Los comandos siguientes se
-conservan como referencia; no crear otro ruleset duplicado.
+La rama predeterminada es `main`. El ruleset `main-quality` está activo sobre ella:
+PR obligatorio, cero aprobaciones externas, conversaciones resueltas, historial
+lineal, bloqueo de eliminación y force push, y comprobación `LaTeX / build`
+obligatoria. Su definición está en
+[main.json](../.github/rulesets/main.json).
 
-Los archivos versionados no activan por sí mismos un ruleset ni cambian la rama
-predeterminada. El conector utilizado para preparar este repositorio permite
-escribir contenido, pero no ofrece esas operaciones administrativas.
+La integración se realiza mediante squash. Se recomienda borrar automáticamente
+las ramas fusionadas.
 
-Configuración objetivo:
+## Consultar y actualizar
 
-1. Rama predeterminada: `main`.
-2. Integración de PR: squash; borrar automáticamente las ramas fusionadas.
-3. Ruleset `main-quality` activo sobre `main` con PR obligatorio, cero
-   aprobaciones externas, conversaciones resueltas, historial lineal, bloqueo
-   de eliminación y force push, y comprobación `LaTeX / build` obligatoria.
-
-El ruleset completo está en `.github/rulesets/main.json`. Esperar a que exista
-una ejecución correcta del workflow antes de activarlo. No activar exigencias
-de firma ni aprobaciones externas sin preparar antes ese flujo.
-
-## Aplicación con GitHub CLI
-
-Con una sesión propia de `gh` autorizada para administrar el repositorio,
-desde la raíz del clon:
-
-```sh
-gh repo edit jfBranch/srl_essays --default-branch main --enable-squash-merge --delete-branch-on-merge
-gh api --method POST repos/jfBranch/srl_essays/rulesets --input .github/rulesets/main.json
-```
-
-El segundo comando crea un ruleset nuevo: ejecutarlo una sola vez. Para actualizar
-uno existente, obtener su ID con `gh api repos/jfBranch/srl_essays/rulesets` y
-usar `--method PUT repos/jfBranch/srl_essays/rulesets/ID` con el mismo archivo.
-
-También puede importarse el JSON desde Settings → Rules → Rulesets → New ruleset
-→ Import a ruleset. Cambiar la rama predeterminada desde Settings → General.
-La plantilla reside en `template/`; la rama original `base-template` no debe
-usarse como almacén permanente de la plantilla.
-
-Verificar después:
+Con GitHub CLI y permisos de administración:
 
 ```sh
 gh repo view jfBranch/srl_essays --json defaultBranchRef
 gh api repos/jfBranch/srl_essays/rulesets
 ```
+
+Para cambiar las opciones generales:
+
+```sh
+gh repo edit jfBranch/srl_essays --default-branch main --enable-squash-merge --delete-branch-on-merge
+```
+
+Para actualizar el ruleset, obtener su ID con la consulta anterior y sustituir `ID`:
+
+```sh
+gh api --method PUT repos/jfBranch/srl_essays/rulesets/ID --input .github/rulesets/main.json
+```
+
+Las opciones generales también se administran en **Settings → General** y las
+reglas en **Settings → Rules → Rulesets**.

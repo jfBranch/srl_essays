@@ -1,28 +1,43 @@
-# Logos y figuras
+# Colores, logos y figuras
 
-Los PNG suministrados están en `logos/`. El mismo booleano `\ifSRLColors` controla
-el color de los títulos y la selección de ambos logos:
+## Modo de color
 
-| Elemento | `\SRLColorstrue` | `\SRLColorsfalse` | Tamaño máximo |
+Editar el booleano en `config/options.tex`, relativo a la carpeta del documento:
+
+```latex
+\SRLColorstrue   % Usar \SRLColorsfalse para el modo sin colores.
+```
+
+| Modo | Títulos y subtítulo de portada | Logos |
+| --- | --- | --- |
+| `\SRLColorstrue` | Rojo SRL | Archivos `*-color.png`. |
+| `\SRLColorsfalse` | Negro | Archivos `*-bw.png`. |
+
+El resto del texto queda negro. Los enlaces se muestran sin recuadros.
+
+La paleta se define en `config/colors.tex`:
+
+| Nombre | RGB | Uso |
+| --- | --- | --- |
+| `redSRL` | 177,35,51 | Títulos. |
+| `yellowSRL` | 252,186,99 | Disponible. |
+| `darkgreySRL` | 237,235,232 | Disponible. |
+| `lightgreySRL` | 247,245,242 | Disponible. |
+
+## Recursos de los logos
+
+| Elemento | Ruta con color | Ruta sin colores | Tamaño máximo |
 | --- | --- | --- | --- |
-| Portada | `logos/srl-cover-color.png` | `logos/srl-cover-bw.png` | 7 cm × 2,2 cm |
-| Encabezado | `logos/srl-header-color.png` | `logos/srl-header-bw.png` | 2,5 cm × 0,7 cm |
+| Portada | `figures/logos/srl-cover-color.png` | `figures/logos/srl-cover-bw.png` | 7 cm × 2,2 cm |
+| Encabezado | `figures/logos/srl-header-color.png` | `figures/logos/srl-header-bw.png` | 2,5 cm × 0,7 cm |
 
-Se conserva la proporción y transparencia de cada recurso. La portada no lleva
-el logo del encabezado. Curso y fecha permanecen negros en ambos modos.
-
-Para usar otros nombres, editar `\SRLCoverLogoColor`, `\SRLCoverLogoBW`,
+Las rutas se configuran con `\SRLCoverLogoColor`, `\SRLCoverLogoBW`,
 `\SRLHeaderLogoColor` y `\SRLHeaderLogoBW` en `config/options.tex`.
-`config/logos.tex` resuelve `\SRLCoverLogo` y `\SRLHeaderLogo` después de leer las
-opciones. El log informa los recursos efectivos mediante `SRL-COVER-LOGO` y
-`SRL-HEADER-LOGO`, o `none` si no existen. Una ruta vacía también omite el logo.
-Si falta una variante seleccionada, no se carga automáticamente la otra.
+Se conserva la proporción y transparencia de cada PNG. La selección carga el
+archivo correspondiente sin convertir sus colores; si falta o su ruta está vacía,
+el logo se omite.
 
-No se convierten ni recolorean los PNG durante la compilación. **Los dos archivos
-de portada suministrados actualmente son idénticos y contienen color.** Para
-obtener una portada monocroma, reemplazar `logos/srl-cover-bw.png` con la versión
-correcta. Los dos archivos de encabezado sí son distintos; el BW es visualmente
-monocromo. El CI comprueba la selección de rutas; no certifica el color de sus
-píxeles. Revisar el PDF tras sustituir cualquier recurso.
+El log registra los recursos efectivos en `SRL-COVER-LOGO` y `SRL-HEADER-LOGO`,
+o `none` cuando se omiten.
 
-Las demás figuras del ensayo pueden colocarse aquí, fuera de `logos/`.
+Las demás figuras del ensayo se guardan fuera de `logos/`.

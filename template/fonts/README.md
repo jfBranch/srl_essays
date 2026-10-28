@@ -1,6 +1,6 @@
-# Fuentes locales
+# Tipografía
 
-La plantilla incluye las cuatro variantes de Minion Pro proporcionadas por el autor:
+La familia predeterminada es Minion Pro. Sus cuatro variantes están en esta carpeta:
 
 | Variante | Archivo |
 | --- | --- |
@@ -9,25 +9,29 @@ La plantilla incluye las cuatro variantes de Minion Pro proporcionadas por el au
 | Negrita | `MinionPro-Bold.otf` |
 | Negrita cursiva | `MinionPro-BoldItalic.otf` |
 
-`\SRLFontName` y `\SRLLocalFontFamily` usan el identificador `MinionPro` en
-`config/options.tex`; ambos coinciden y seleccionan estos OTF, tanto localmente
-como en CI. El nombre de familia interno para una instalación del sistema es
-`Minion Pro` (con espacio). Los nombres de archivo incluyen `Italic`, aunque el
-nombre PostScript de esas variantes termine en `It` o `BoldIt`.
+## Elegir una familia
 
-Orden de resolución:
+Editar `config/options.tex`, relativo a la carpeta del documento:
 
-1. Los cuatro archivos locales configurados, si la familia local coincide con la
-   solicitada y existe el archivo Regular.
-2. La familia solicitada instalada en el sistema.
-3. `TeX Gyre Termes`, con una advertencia explícita en el registro de compilación.
+```latex
+\newcommand{\SRLFontName}{MinionPro}
+```
 
-Para otra familia instalada, cambiar solo `\SRLFontName` por su nombre exacto.
-Para otra familia local, cambiar también `\SRLLocalFontFamily` y las cuatro rutas.
-Una familia local parcial produce error; no se sintetizan estilos ni se mezclan
-familias silenciosamente. El log informa `SRL-FONT` y `SRL-FONT-SOURCE`.
-Cambiar de fuente requiere revisar el PDF y su paginación.
+Para una familia instalada, usar su nombre exacto, por ejemplo `TeX Gyre Pagella`.
+El nombre de Minion Pro instalada en el sistema es `Minion Pro`, con espacio.
 
-Los OTF se aportaron al repositorio; la compilación no descarga fuentes.
-Su licencia sigue siendo la de su titular: las instrucciones de esta plantilla
-no conceden derechos adicionales sobre los archivos tipográficos.
+Para una familia local, hacer coincidir `\SRLLocalFontFamily` con `\SRLFontName`
+y configurar `\SRLFontDirectory`, `\SRLFontRegular`, `\SRLFontItalic`,
+`\SRLFontBold` y `\SRLFontBoldItalic`.
+
+La resolución sigue este orden:
+
+1. Archivos locales, si coincide la familia y existe el archivo regular.
+2. Familia instalada en el sistema.
+3. `\SRLFallbackFont`, cuyo valor predeterminado es `TeX Gyre Termes`.
+
+Una familia local requiere las cuatro variantes. El log informa la familia
+efectiva en `SRL-FONT` y su procedencia en `SRL-FONT-SOURCE`; también advierte
+cuando usa la alternativa. Revisar la paginación después de cambiar la fuente.
+
+Los OTF conservan la licencia de su titular.
