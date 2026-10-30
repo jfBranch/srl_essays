@@ -14,5 +14,3 @@ La estructura y los recursos se copiaron de `template/`, excepto los README de l
 **Criterios editoriales:** se sigue [la política del repositorio](../../docs/template-requirements.md) y las guías SRL adjuntas al proyecto. Se usa XeLaTeX y Biber. No se incluyen en el repositorio público los PDF de lectura del curso.
 
 **Trazabilidad:** el capítulo de «Revelation» es de **Charles E. Hill** en el volumen *A Biblical-Theological Introduction to the New Testament*, editado por Michael J. Kruger. La paginación 53-54 citada en notas remite exclusivamente al PDF del curso; no debe confundirse con la paginación del volumen impreso. Véase `notes/fuentes-y-revision.md`.
-
-**Revisión antes de la entrega:** verificar la lectura de las obras secundarias no disponibles íntegramente, la grafía exacta de las referencias, la extensión, las advertencias de páginas únicas del PDF, y corregir los datos pendientes de portada. No se atribuyen citas literales a libros no accesibles.
