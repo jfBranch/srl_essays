@@ -18,7 +18,6 @@
 - La interpretación de `ezēsan` como «vivieron» se presenta como opción contextual defendida por Hill, no como significado único impuesto por el aoristo.
 - La correspondencia de Gog-Magog con Ezequiel 38–39 ofrece un argumento fuerte a favor de la recapitulación, pero no prueba por sí sola todos los detalles cronológicos del milenio.
 - Verificar en la edición impresa del volumen de Kruger los localizadores editoriales del capítulo de Hill antes de entrega definitiva.
-- Completar docente, ciudad y confirmar fecha y autor en `metadata.tex`.
 - Comprobar la revisión de 3600 palabras, el PDF final y las advertencias por hojas únicas del SRL.
 
 ## Fuentes públicas principales
