@@ -1,0 +1,40 @@
+% Base editorial: turabian-researchpaper. Las adaptaciones del SRL
+% se separan de las opciones que el autor cambia por ensayo.
+\usepackage{iftex}
+\RequireXeTeX
+\usepackage{fontspec}
+\usepackage[spanish,es-noshorthands,es-nodecimaldot]{babel}
+\usepackage{csquotes}
+\DeclareQuoteStyle{spanish}{«}{»}{“}{”}
+\setquotestyle{spanish}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{ragged2e}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{refcount}
+\input{config/fonts}
+\input{config/colors}
+\input{config/logos}
+
+% La guía SRL exige NB; no se sustituye por chicago.bst (autor-fecha).
+\usepackage[
+  notes,backend=biber,autocite=footnote,
+  autolang=none,
+  noibid,short=false,sorting=nty,sortlocale=es_ES,
+  maxcitenames=3,mincitenames=1,maxbibnames=99,minbibnames=99,
+  isbn=false
+]{biblatex-chicago}
+\DeclareLanguageMapping{spanish}{cms-spanish}
+\usepackage{hyperref}
+\hypersetup{
+  hidelinks,unicode=true,
+  pdftitle={\EssayTitle},pdfauthor={\EssayAuthor},
+  pdfsubject={\EssayCourse},pdfcreator={XeLaTeX / plantilla SRL}
+}
+\urlstyle{same}
+\input{config/layout}

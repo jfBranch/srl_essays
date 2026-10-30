@@ -1,0 +1,24 @@
+% !TeX program = xelatex
+% !BIB program = biber
+\documentclass[12pt,letterpaper,oneside,titlepage,noraggedright,noadjustbib]{turabian-researchpaper}
+\input{config/options}
+\input{metadata}
+\input{config/preamble}
+\addbibresource{references.bib}
+
+\begin{document}
+\SRLmaketitle
+\ifSRLOutline
+  \SRLmakeoutline
+\fi
+\begin{SRLsinglepage}{introduccion}
+  \input{sections/01-introduccion}
+\end{SRLsinglepage}
+\input{sections/02-argumentacion}
+\begin{SRLsinglepage}{conclusion}
+  \input{sections/03-conclusion}
+\end{SRLsinglepage}
+\begin{SRLsinglepage}{bibliografia}
+  \printbibliography[heading=srlbibliography]
+\end{SRLsinglepage}
+\end{document}

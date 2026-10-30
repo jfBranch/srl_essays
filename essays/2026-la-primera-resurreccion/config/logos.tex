@@ -1,0 +1,18 @@
+% Se evalúa después de options.tex: el mismo booleano gobierna texto y logos.
+\ifSRLColors
+  \let\SRLCoverLogo\SRLCoverLogoColor
+  \let\SRLHeaderLogo\SRLHeaderLogoColor
+\else
+  \let\SRLCoverLogo\SRLCoverLogoBW
+  \let\SRLHeaderLogo\SRLHeaderLogoBW
+\fi
+
+% Diagnóstico de los recursos efectivos, sin convertir ni sustituir imágenes.
+\AtBeginDocument{%
+  \IfFileExists{\SRLCoverLogo}
+    {\typeout{SRL-COVER-LOGO: \SRLCoverLogo}}
+    {\typeout{SRL-COVER-LOGO: none}}%
+  \IfFileExists{\SRLHeaderLogo}
+    {\typeout{SRL-HEADER-LOGO: \SRLHeaderLogo}}
+    {\typeout{SRL-HEADER-LOGO: none}}%
+}
