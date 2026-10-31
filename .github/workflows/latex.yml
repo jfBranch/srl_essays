@@ -1,0 +1,69 @@
+name: LaTeX
+
+on:
+  push:
+    branches: ['**']
+    tags: ['template-v*', 'essay-*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: latex-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: LaTeX / build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Obtener fuentes
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Descubrir documentos
+        id: documents
+        shell: bash
+        run: |
+          python3 scripts/build.py --list > /tmp/srl-documents.txt
+          {
+            echo 'files<<SRL_DOCUMENTS'
+            cat /tmp/srl-documents.txt
+            echo 'SRL_DOCUMENTS'
+          } >> "$GITHUB_OUTPUT"
+      - name: Compilar con TeX Live 2026 y XeLaTeX
+        uses: xu-cheng/latex-action@6549dc21effb2730855a1281407ecfcececc6c1b # v4
+        with:
+          root_file: ${{ steps.documents.outputs.files }}
+          work_in_root_file_dir: true
+          texlive_version: '2026'
+          args: -norc -r /tmp/srl-latexmkrc
+          pre_compile: |
+            cp "$GITHUB_WORKSPACE/latexmkrc" /tmp/srl-latexmkrc
+            { xelatex --version; latexmk --version; biber --version; } > "$GITHUB_WORKSPACE/toolchain.txt"
+      - name: Comprobar citas, referencias y caracteres
+        run: python3 scripts/build.py --check-logs
+      - name: Conservar PDF y datos de compilación
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: latex-${{ github.sha }}
+          path: |
+            **/build/*.pdf
+            toolchain.txt
+          if-no-files-found: error
+          retention-days: 30
+      - name: Conservar registros si hay errores
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: latex-logs-${{ github.sha }}
+          path: |
+            **/build/*.log
+            **/build/*.blg
+            toolchain.txt
+          if-no-files-found: ignore
+          retention-days: 7
+

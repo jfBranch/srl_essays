@@ -1,0 +1,14 @@
+* text=auto
+*.tex text eol=lf diff=tex
+*.bib text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.otf binary
+*.ttf binary
+

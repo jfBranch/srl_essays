@@ -1,0 +1,15 @@
+% Prueba de infraestructura. No es la plantilla editorial del SRL.
+\documentclass{article}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\usepackage[spanish]{babel}
+\usepackage[backend=biber,style=numeric]{biblatex}
+\addbibresource{references.bib}
+\begin{document}
+\section{Prueba técnica}\label{sec:prueba}
+Compilación de caracteres españoles: á, é, í, ó, ú, ü, ñ, ¿?, ¡!.
+Referencia interna: sección~\ref{sec:prueba}.
+Referencia bibliográfica de prueba: \cite{smoke}.
+\printbibliography
+\end{document}
+

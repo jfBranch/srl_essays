@@ -1,0 +1,27 @@
+# Compilación: conservar fuentes; distribuir el PDF de entrega mediante Releases.
+build/
+toolchain.txt
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.bak
+*.swp
+__pycache__/
+.DS_Store
+Thumbs.db
+# No ignorar todos los PDF: algunas figuras son fuentes legítimas.
+
