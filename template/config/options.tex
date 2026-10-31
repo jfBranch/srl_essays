@@ -1,0 +1,24 @@
+% Familia tipográfica: identificador local o nombre instalado.
+\newcommand{\SRLFontName}{MinionPro}
+\newcommand{\SRLFallbackFont}{TeX Gyre Termes}
+
+% Familia local: solo se usa si coincide con SRLFontName y existe Regular.
+% Nombres de los cuatro archivos OTF de la familia local.
+\newcommand{\SRLLocalFontFamily}{MinionPro}
+\newcommand{\SRLFontDirectory}{fonts/}
+\newcommand{\SRLFontRegular}{MinionPro-Regular.otf}
+\newcommand{\SRLFontItalic}{MinionPro-Italic.otf}
+\newcommand{\SRLFontBold}{MinionPro-Bold.otf}
+\newcommand{\SRLFontBoldItalic}{MinionPro-BoldItalic.otf}
+
+% Un solo booleano controla el color de los títulos y la variante de los logos.
+\newif\ifSRLColors
+\SRLColorstrue
+\newif\ifSRLOutline
+\SRLOutlinetrue
+
+% Si falta el PNG seleccionado, se omite; no se usa la otra variante.
+\newcommand{\SRLCoverLogoColor}{figures/logos/srl-cover-color.png}
+\newcommand{\SRLCoverLogoBW}{figures/logos/srl-cover-bw.png}
+\newcommand{\SRLHeaderLogoColor}{figures/logos/srl-header-color.png}
+\newcommand{\SRLHeaderLogoBW}{figures/logos/srl-header-bw.png}
