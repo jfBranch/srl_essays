@@ -4,7 +4,8 @@
 
 Se usa [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow).
 `main` reúne la plantilla y los ensayos; cada cambio se prepara en una rama
-temporal y se integra mediante un PR con **Squash and merge**.
+temporal y se integra mediante un PR con **Create a merge commit**. Así se
+conservan los commits de redacción y el punto en que se incorpora cada trabajo.
 Las carpetas identifican documentos; las etiquetas, versiones.
 
 Convenciones de ramas:
@@ -25,6 +26,35 @@ git switch -c essay/tema
 Al terminar, revisar y fusionar el PR y borrar la rama temporal. Las reglas de
 integración se mantienen en [configuración de GitHub](github-settings.md).
 Para preparar un documento, seguir [iniciar un ensayo](../essays/README.md#iniciar-un-ensayo).
+
+## Actualizar una rama de trabajo
+
+Antes de integrar un trabajo, se pueden reorganizar sus commits con rebase.
+Con los cambios locales guardados en commits, actualizar la rama sobre `main`:
+
+```sh
+git fetch origin
+git switch essay/tema
+git rebase origin/main
+git push --force-with-lease origin essay/tema
+```
+
+Revisar los cambios remotos antes del rebase. Si hay conflictos, resolverlos,
+añadir los archivos con `git add` y continuar con `git rebase --continue`;
+`git rebase --abort` cancela la operación. Si el push con lease se rechaza,
+revisar los nuevos commits remotos antes de intentarlo de nuevo.
+
+La reescritura se limita a commits de trabajo que todavía no se han integrado
+en `main`. Para sincronizar una rama cuyos commits ya fueron integrados, usar
+`git merge origin/main`. Las correcciones a trabajos integrados se registran
+como nuevos commits.
+
+## Consultar el historial
+
+```sh
+git log --graph --oneline --decorate main  # commits y fusiones
+git log --first-parent --oneline main     # vista de las integraciones
+```
 
 ## Compilación
 
