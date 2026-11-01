@@ -6,7 +6,7 @@ Ensayo argumentativo para **Epístolas generales y Apocalipsis**, Maestría en E
 - **Límite:** máximo 3600 palabras para el ensayo.
 - **Bibliografía:** mínimo diez fuentes académicas, confesionales o patrísticas efectivamente citadas.
 - **Tesis:** Apocalipsis 20:4-6 describe la entrada de los fieles muertos, representados por los mártires, en la vida y el reinado celestial con Cristo durante la era interadvental, no una resurrección corporal previa ni primordialmente su regeneración.
-- **Base de la plantilla:** `main`, commit `741d5bf76329d2b83ea3a01efb0dbb8c178c87f2` (28 de octubre de 2026).
+- **Base de la plantilla:** `main`, commit `91fd2c46aa78ab019cf00aa8f9d892a92cb179f0` (31 de octubre de 2026).
 - **Estado:** primera versión integral para revisión académica, bibliográfica y tipográfica; no constituye entrega aprobada.
 
 La estructura y los recursos se copiaron de `template/`, excepto los README de la plantilla. Para compilar, véanse [las instrucciones comunes](../../docs/workflow.md#compilación); para modificar citas y títulos, [la guía de escritura](../../template/README.md).
